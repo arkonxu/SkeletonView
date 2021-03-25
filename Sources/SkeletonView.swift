@@ -92,7 +92,7 @@ import UIKit
     }
 }
 
-extension UIView {
+@objc open extension UIView {
     @objc open func skeletonLayoutSubviews() {
         guard Thread.isMainThread else { return }
         skeletonLayoutSubviews()
@@ -245,7 +245,7 @@ extension UIView {
     }
 }
 
-extension UIView {
+@objc open extension UIView {
     @objc open func addSkeletonLayer(skeletonConfig config: SkeletonConfig) {
         guard let skeletonLayer = SkeletonLayerBuilder()
             .setSkeletonType(config.type)
