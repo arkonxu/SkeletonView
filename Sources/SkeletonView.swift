@@ -2,7 +2,7 @@
 
 import UIKit
 
-public extension UIView {
+@objc public extension UIView {
     /// Shows the skeleton without animation using the view that calls this method as root view.
     ///
     /// - Parameters:
