@@ -8,7 +8,7 @@ public extension UIView {
     /// - Parameters:
     ///   - color: The color of the skeleton. Defaults to `SkeletonAppearance.default.tintColor`.
     ///   - transition: The style of the transition when the skeleton appears. Defaults to `.crossDissolve(0.25)`.
-    func showSkeleton(usingColor color: UIColor = SkeletonAppearance.default.tintColor, transition: SkeletonTransitionStyle = .crossDissolve(0.25)) {
+    @objc func showSkeleton(usingColor color: UIColor = SkeletonAppearance.default.tintColor, transition: SkeletonTransitionStyle = .crossDissolve(0.25)) {
         let config = SkeletonConfig(type: .solid, colors: [color], transition: transition)
         showSkeleton(skeletonConfig: config)
     }
@@ -18,7 +18,7 @@ public extension UIView {
     /// - Parameters:
     ///   - gradient: The gradient of the skeleton. Defaults to `SkeletonAppearance.default.gradient`.
     ///   - transition: The style of the transition when the skeleton appears. Defaults to `.crossDissolve(0.25)`.
-    func showGradientSkeleton(usingGradient gradient: SkeletonGradient = SkeletonAppearance.default.gradient, transition: SkeletonTransitionStyle = .crossDissolve(0.25)) {
+    @objc func showGradientSkeleton(usingGradient gradient: SkeletonGradient = SkeletonAppearance.default.gradient, transition: SkeletonTransitionStyle = .crossDissolve(0.25)) {
         let config = SkeletonConfig(type: .gradient, colors: gradient.colors, transition: transition)
         showSkeleton(skeletonConfig: config)
     }
@@ -31,7 +31,7 @@ public extension UIView {
     ///   - color: The color of skeleton. Defaults to `SkeletonAppearance.default.tintColor`.
     ///   - animation: The animation of the skeleton. Defaults to `nil`.
     ///   - transition: The style of the transition when the skeleton appears. Defaults to `.crossDissolve(0.25)`.
-    func showAnimatedSkeleton(usingColor color: UIColor = SkeletonAppearance.default.tintColor, animation: SkeletonLayerAnimation? = nil, transition: SkeletonTransitionStyle = .crossDissolve(0.25)) {
+    @objc func showAnimatedSkeleton(usingColor color: UIColor = SkeletonAppearance.default.tintColor, animation: SkeletonLayerAnimation? = nil, transition: SkeletonTransitionStyle = .crossDissolve(0.25)) {
         let config = SkeletonConfig(type: .solid, colors: [color], animated: true, animation: animation, transition: transition)
         showSkeleton(skeletonConfig: config)
     }
@@ -44,48 +44,48 @@ public extension UIView {
     ///   - gradient: The gradient of the skeleton. Defaults to `SkeletonAppearance.default.gradient`.
     ///   - animation: The animation of the skeleton. Defaults to `nil`.
     ///   - transition: The style of the transition when the skeleton appears. Defaults to `.crossDissolve(0.25)`.
-    func showAnimatedGradientSkeleton(usingGradient gradient: SkeletonGradient = SkeletonAppearance.default.gradient, animation: SkeletonLayerAnimation? = nil, transition: SkeletonTransitionStyle = .crossDissolve(0.25)) {
+    @objc func showAnimatedGradientSkeleton(usingGradient gradient: SkeletonGradient = SkeletonAppearance.default.gradient, animation: SkeletonLayerAnimation? = nil, transition: SkeletonTransitionStyle = .crossDissolve(0.25)) {
         let config = SkeletonConfig(type: .gradient, colors: gradient.colors, animated: true, animation: animation, transition: transition)
         showSkeleton(skeletonConfig: config)
     }
 
-    func updateSkeleton(usingColor color: UIColor = SkeletonAppearance.default.tintColor) {
+    @objc func updateSkeleton(usingColor color: UIColor = SkeletonAppearance.default.tintColor) {
         let config = SkeletonConfig(type: .solid, colors: [color])
         updateSkeleton(skeletonConfig: config)
     }
 
-    func updateGradientSkeleton(usingGradient gradient: SkeletonGradient = SkeletonAppearance.default.gradient) {
+    @objc func updateGradientSkeleton(usingGradient gradient: SkeletonGradient = SkeletonAppearance.default.gradient) {
         let config = SkeletonConfig(type: .gradient, colors: gradient.colors)
         updateSkeleton(skeletonConfig: config)
     }
 
-    func updateAnimatedSkeleton(usingColor color: UIColor = SkeletonAppearance.default.tintColor, animation: SkeletonLayerAnimation? = nil) {
+    @objc func updateAnimatedSkeleton(usingColor color: UIColor = SkeletonAppearance.default.tintColor, animation: SkeletonLayerAnimation? = nil) {
         let config = SkeletonConfig(type: .solid, colors: [color], animated: true, animation: animation)
         updateSkeleton(skeletonConfig: config)
     }
 
-    func updateAnimatedGradientSkeleton(usingGradient gradient: SkeletonGradient = SkeletonAppearance.default.gradient, animation: SkeletonLayerAnimation? = nil) {
+    @objc func updateAnimatedGradientSkeleton(usingGradient gradient: SkeletonGradient = SkeletonAppearance.default.gradient, animation: SkeletonLayerAnimation? = nil) {
         let config = SkeletonConfig(type: .gradient, colors: gradient.colors, animated: true, animation: animation)
         updateSkeleton(skeletonConfig: config)
     }
 
-    func layoutSkeletonIfNeeded() {
+    @objc func layoutSkeletonIfNeeded() {
         flowDelegate?.willBeginLayingSkeletonsIfNeeded(rootView: self)
         recursiveLayoutSkeletonIfNeeded(root: self)
     }
     
-    func hideSkeleton(reloadDataAfter reload: Bool = true, transition: SkeletonTransitionStyle = .crossDissolve(0.25)) {
+    @objc func hideSkeleton(reloadDataAfter reload: Bool = true, transition: SkeletonTransitionStyle = .crossDissolve(0.25)) {
         flowDelegate?.willBeginHidingSkeletons(rootView: self)
         recursiveHideSkeleton(reloadDataAfter: reload, transition: transition, root: self)
     }
     
-    func startSkeletonAnimation(_ anim: SkeletonLayerAnimation? = nil) {
+    @objc func startSkeletonAnimation(_ anim: SkeletonLayerAnimation? = nil) {
         subviewsSkeletonables.recursiveSearch(leafBlock: startSkeletonLayerAnimationBlock(anim)) { subview in
             subview.startSkeletonAnimation(anim)
         }
     }
 
-    func stopSkeletonAnimation() {
+    @objc func stopSkeletonAnimation() {
         subviewsSkeletonables.recursiveSearch(leafBlock: stopSkeletonLayerAnimationBlock) { subview in
             subview.stopSkeletonAnimation()
         }
@@ -106,14 +106,14 @@ extension UIView {
         updateSkeleton(skeletonConfig: config)
     }
     
-    func showSkeleton(skeletonConfig config: SkeletonConfig) {
+    @objc func showSkeleton(skeletonConfig config: SkeletonConfig) {
         isSkeletonAnimated = config.animated
         flowDelegate = SkeletonFlowHandler()
         flowDelegate?.willBeginShowingSkeletons(rootView: self)
         recursiveShowSkeleton(skeletonConfig: config, root: self)
     }
 
-    private func recursiveShowSkeleton(skeletonConfig config: SkeletonConfig, root: UIView? = nil) {
+    @objc func recursiveShowSkeleton(skeletonConfig config: SkeletonConfig, root: UIView? = nil) {
         if isHiddenWhenSkeletonIsActive {
             isHidden = true
         }
@@ -133,7 +133,7 @@ extension UIView {
         }
     }
 
-    private func showSkeletonIfNotActive(skeletonConfig config: SkeletonConfig) {
+    @objc func showSkeletonIfNotActive(skeletonConfig config: SkeletonConfig) {
         guard !isSkeletonActive else { return }
         saveViewState()
 
@@ -141,13 +141,13 @@ extension UIView {
         addSkeletonLayer(skeletonConfig: config)
     }
 
-    func updateSkeleton(skeletonConfig config: SkeletonConfig) {
+    @objc func updateSkeleton(skeletonConfig config: SkeletonConfig) {
         isSkeletonAnimated = config.animated
         flowDelegate?.willBeginUpdatingSkeletons(rootView: self)
         recursiveUpdateSkeleton(skeletonConfig: config, root: self)
     }
 
-    private func recursiveUpdateSkeleton(skeletonConfig config: SkeletonConfig, root: UIView? = nil) {
+    @objc func recursiveUpdateSkeleton(skeletonConfig config: SkeletonConfig, root: UIView? = nil) {
         guard isSkeletonActive else { return }
         currentSkeletonConfig = config
         updateDummyDataSourceIfNeeded()
@@ -168,7 +168,7 @@ extension UIView {
         }
     }
 
-    private func recursiveLayoutSkeletonIfNeeded(root: UIView? = nil) {
+    @objc func recursiveLayoutSkeletonIfNeeded(root: UIView? = nil) {
         subviewsSkeletonables.recursiveSearch(leafBlock: {
             guard isSkeletonable, isSkeletonActive else { return }
             layoutSkeletonLayerIfNeeded()
@@ -184,7 +184,7 @@ extension UIView {
         }
     }
 
-    private func recursiveHideSkeleton(reloadDataAfter reload: Bool, transition: SkeletonTransitionStyle, root: UIView? = nil) {
+    @objc func recursiveHideSkeleton(reloadDataAfter reload: Bool, transition: SkeletonTransitionStyle, root: UIView? = nil) {
         guard isSkeletonActive else { return }
         if isHiddenWhenSkeletonIsActive {
             isHidden = false
@@ -203,7 +203,7 @@ extension UIView {
         }
     }
     
-    private func startSkeletonLayerAnimationBlock(_ anim: SkeletonLayerAnimation? = nil) -> VoidBlock {
+    @objc func startSkeletonLayerAnimationBlock(_ anim: SkeletonLayerAnimation? = nil) -> VoidBlock {
         return {
             self.isSkeletonAnimated = true
             guard let layer = self.skeletonLayer else { return }
@@ -213,7 +213,7 @@ extension UIView {
         }
     }
     
-    private var stopSkeletonLayerAnimationBlock: VoidBlock {
+    var stopSkeletonLayerAnimationBlock: VoidBlock {
         return {
             self.isSkeletonAnimated = false
             guard let layer = self.skeletonLayer else { return }
@@ -221,7 +221,7 @@ extension UIView {
         }
     }
     
-    private func swizzleLayoutSubviews() {
+    @objc func swizzleLayoutSubviews() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
             DispatchQueue.once(token: "UIView.SkeletonView.swizzleLayoutSubviews") {
                 swizzle(selector: #selector(UIView.layoutSubviews),
@@ -233,7 +233,7 @@ extension UIView {
         }
     }
 
-    private func swizzleTraitCollectionDidChange() {
+    @objc func swizzleTraitCollectionDidChange() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
             DispatchQueue.once(token: "UIView.SkeletonView.swizzleTraitCollectionDidChange") {
                 swizzle(selector: #selector(UIView.traitCollectionDidChange(_:)),
@@ -246,7 +246,7 @@ extension UIView {
 }
 
 extension UIView {
-    func addSkeletonLayer(skeletonConfig config: SkeletonConfig) {
+    @objc func addSkeletonLayer(skeletonConfig config: SkeletonConfig) {
         guard let skeletonLayer = SkeletonLayerBuilder()
             .setSkeletonType(config.type)
             .addColors(config.colors)
@@ -265,7 +265,7 @@ extension UIView {
         status = .on
     }
     
-    func updateSkeletonLayer(skeletonConfig config: SkeletonConfig) {
+    @objc func updateSkeletonLayer(skeletonConfig config: SkeletonConfig) {
         guard let skeletonLayer = skeletonLayer else { return }
         skeletonLayer.update(usingColors: config.colors)
         if config.animated {
@@ -275,12 +275,12 @@ extension UIView {
         }
     }
 
-    func layoutSkeletonLayerIfNeeded() {
+    @objc func layoutSkeletonLayerIfNeeded() {
         guard let skeletonLayer = skeletonLayer else { return }
         skeletonLayer.layoutIfNeeded()
     }
     
-    func removeSkeletonLayer() {
+    @objc func removeSkeletonLayer() {
         guard isSkeletonActive,
             let skeletonLayer = skeletonLayer,
             let transitionStyle = currentSkeletonConfig?.transition else { return }
